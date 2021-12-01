@@ -13,8 +13,7 @@ fi
 if [ ! -d "./day_$dir" ] # directory does not exist, creating the file structure
 then
     cargo new --vcs=none --quiet "day_$dir" &&
-    touch "./day_$dir/input1.txt" &&
-    touch "./day_$dir/input2.txt" &&
+    touch "./day_$dir/input.txt" &&
     echo "[!] created the file structure"
 fi
 
