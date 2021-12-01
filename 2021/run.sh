@@ -10,18 +10,12 @@ then
     echo "Usage: ./run.sh <day number>" && exit
 fi
 
-if [ ! -d "./$dir" ] # directory does not exist, creating the file structure
+if [ ! -d "./day_$dir" ] # directory does not exist, creating the file structure
 then
-    mkdir "./$dir" &&
-    touch "./$dir/main.rs" &&
-    echo "fn main() {}" > "./$dir/main.rs" &&
-    echo "created the file structure"
+    cargo new --vcs=none --quiet "day_$dir" &&
+    touch "./day_$dir/input1.txt" &&
+    touch "./day_$dir/input2.txt" &&
+    echo "[!] created the file structure"
 fi
 
-if [ ! -d "./$dir/target" ] # target directory does not exist
-then
-    mkdir "./$dir/target" &&
-    echo "target directory created"
-fi
-
-rustc "./$dir/main.rs" -o "./$dir/target/main.x" && ./$dir/target/main.x $arg1 $arg2 $arg3
+(cd "./day_$dir" && cargo run --quiet $arg1 $arg2 $arg3)
