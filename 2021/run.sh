@@ -2,6 +2,11 @@
 
 dir=$1
 
+if [[ $dir == "" ]] # if the directory is empty, show the usage information
+then
+    echo "Usage: ./run.sh <day number>" && exit
+fi
+
 if [ ! -d "./$dir" ] # directory does not exist, creating the file structure
 then
     mkdir "./$dir" &&
