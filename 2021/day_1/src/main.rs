@@ -4,10 +4,7 @@ fn part1(input_file: String) {
     let mut answer: usize = 0;
     let mut numbers_vec_str: Vec<&str> = input_file.split("\n").collect();
     if numbers_vec_str.last().unwrap().to_owned() == "" { numbers_vec_str.pop(); } // remove the last element if it's empty
-    let mut numbers_vec: Vec<usize> = vec![];
-    for number in numbers_vec_str.iter() {
-        numbers_vec.push(number.parse::<usize>().unwrap());
-    }
+    let numbers_vec: Vec<usize> = numbers_vec_str.iter().map(|number| number.parse::<usize>().unwrap()).collect(); // parse vector of strings as a vector of usize
 
     let mut current_number: usize = numbers_vec.first().unwrap().to_owned();
 
@@ -25,10 +22,7 @@ fn part2(input_file: String) {
     let mut answer: usize = 0;
     let mut numbers_vec_str: Vec<&str> = input_file.split("\n").collect();
     if numbers_vec_str.last().unwrap().to_owned() == "" { numbers_vec_str.pop(); } // remove the last element if it's empty
-    let mut numbers_vec: Vec<usize> = vec![];
-    for number in numbers_vec_str.iter() {
-        numbers_vec.push(number.parse::<usize>().unwrap());
-    }
+    let numbers_vec: Vec<usize> = numbers_vec_str.iter().map(|number| number.parse::<usize>().unwrap()).collect(); // parse vector of strings as a vector of usize
 
     let mut current_result: usize;
     let mut results_vec: Vec<usize> = vec![];
