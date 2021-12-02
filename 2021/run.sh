@@ -1,20 +1,21 @@
 #!/bin/bash
 
-dir=$1
+day=$1
 arg1=$2
 arg2=$3
 arg3=$4
 
-if [[ $dir == "" ]] # if the directory is empty, show the usage information
+if [[ $day == "" ]] # if the directory is empty, show the usage information
 then
     echo "Usage: ./run.sh <day number>" && exit
 fi
 
-if [ ! -d "./day_$dir" ] # directory does not exist, creating the file structure
+if [ ! -d "./day_$day" ] # directory does not exist, creating the file structure
 then
-    cargo new --vcs=none --quiet "day_$dir" &&
-    touch "./day_$dir/input.txt" &&
+    cargo new --vcs=none --quiet "day_$day" &&
+    touch "./day_$day/input.txt" &&
+    cat "./template.rs" > "day_$day/src/main.rs" &&
     echo "[!] created the file structure"
 fi
 
-(cd "./day_$dir" && cargo run --quiet $arg1 $arg2 $arg3)
+(cd "./day_$day" && cargo run --quiet $arg1 $arg2 $arg3)
