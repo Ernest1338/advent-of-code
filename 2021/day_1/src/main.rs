@@ -11,13 +11,11 @@ fn part1(input_file: String) {
 
     let mut current_number: usize = numbers_vec.first().unwrap().to_owned();
 
-    let mut i: usize;
-    for number_index in 0..numbers_vec.len()-1 {
-        i = number_index + 1;
-        if numbers_vec[i] > current_number {
-            answer = answer + 1;
+    for number_index in 1..numbers_vec.len() {
+        if numbers_vec[number_index] > current_number {
+            answer += 1;
         }
-        current_number = numbers_vec[i];
+        current_number = numbers_vec[number_index];
     }
 
     println!("Answer: {}", answer);
@@ -41,13 +39,11 @@ fn part2(input_file: String) {
     }
 
     let mut current_number: usize = results_vec.first().unwrap().to_owned();
-    let mut i;
-    for result_index in 0..results_vec.len()-1 {
-        i = result_index + 1;
-        if results_vec[i] > current_number {
-            answer = answer + 1;
+    for result_index in 1..results_vec.len() {
+        if results_vec[result_index] > current_number {
+            answer += 1;
         }
-        current_number = results_vec[i];
+        current_number = results_vec[result_index];
     }
 
     println!("Answer: {}", answer);
