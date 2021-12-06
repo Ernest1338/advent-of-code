@@ -18,4 +18,4 @@ then
     echo "[!] created the file structure"
 fi
 
-(cd "./day_$day" && cargo run --quiet $arg1 $arg2 $arg3)
+(cd "./day_$day" && cargo run --release --quiet $arg1 $arg2 $arg3)
