@@ -1,3 +1,5 @@
+#![allow(dead_code, unused_variables, unused_mut)]
+
 use std::fs::read_to_string;
 
 fn part1(input_file: String) {

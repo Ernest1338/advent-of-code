@@ -1,3 +1,5 @@
+#![allow(dead_code, unused_variables, unused_mut)]
+
 use std::fs::read_to_string;
 
 fn is_strait_line(points: Vec<usize>) -> bool {
