@@ -15,7 +15,7 @@ fn part2(input_file: String) {
 fn main() {
     let part: i32 = 1;
 
-    let input_file: String = read_to_string("input.txt").unwrap();
+    let input_file: String = read_to_string("sample.txt").unwrap();
 
     if part == 1 { part1(input_file); }
     else if part == 2 { part2(input_file); }
