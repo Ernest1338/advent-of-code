@@ -5,7 +5,8 @@ use std::fs::read_to_string;
 fn part1(input_file: String) {
     let answer: usize;
     let mut steps_vec_str: Vec<&str> = input_file.split("\n").collect();
-    if steps_vec_str.last().unwrap().to_owned() == "" { // remove the last element if it's empty
+    if steps_vec_str.last().unwrap().to_owned() == "" {
+        // remove the last element if it's empty
         steps_vec_str.pop();
     }
     let steps_vec: Vec<Vec<&str>> = steps_vec_str
@@ -34,7 +35,8 @@ fn part1(input_file: String) {
 fn part2(input_file: String) {
     let answer: usize;
     let mut steps_vec_str: Vec<&str> = input_file.split("\n").collect();
-    if steps_vec_str.last().unwrap().to_owned() == "" { // remove the last element if it's empty
+    if steps_vec_str.last().unwrap().to_owned() == "" {
+        // remove the last element if it's empty
         steps_vec_str.pop();
     }
     let steps_vec: Vec<Vec<&str>> = steps_vec_str
