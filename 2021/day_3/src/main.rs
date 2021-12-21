@@ -5,7 +5,10 @@ use std::fs::read_to_string;
 fn part1(input_file: String) {
     let answer: usize;
     let mut binary_vec_str: Vec<&str> = input_file.split("\n").collect();
-    if binary_vec_str.last().unwrap().to_owned() == "" { binary_vec_str.pop(); } // remove the last element if it's empty
+    if binary_vec_str.last().unwrap().to_owned() == "" {
+        // remove the last element if it's empty
+        binary_vec_str.pop();
+    }
 
     let len_of_binary: usize = binary_vec_str[0].len();
     let mut gamma_vec: Vec<i32> = vec![0; len_of_binary];
@@ -14,8 +17,7 @@ fn part1(input_file: String) {
         for digit_index in 0..number.len() {
             if number.chars().nth(digit_index).unwrap() == '0' {
                 gamma_vec[digit_index] -= 1;
-            }
-            else {
+            } else {
                 gamma_vec[digit_index] += 1;
             }
         }
@@ -25,8 +27,7 @@ fn part1(input_file: String) {
     for value in &gamma_vec {
         if value > &0 {
             gamma_binary_value += &"1".to_string();
-        }
-        else {
+        } else {
             gamma_binary_value += &"0".to_string();
         }
     }
@@ -35,13 +36,13 @@ fn part1(input_file: String) {
     for digit in gamma_binary_value.chars() {
         if digit == '0' {
             epsilon_binary_value += &"1".to_string();
-        }
-        else {
+        } else {
             epsilon_binary_value += &"0".to_string();
         }
     }
 
-    answer = usize::from_str_radix(&gamma_binary_value, 2).unwrap() * usize::from_str_radix(&epsilon_binary_value, 2).unwrap();
+    answer = usize::from_str_radix(&gamma_binary_value, 2).unwrap()
+        * usize::from_str_radix(&epsilon_binary_value, 2).unwrap();
 
     println!("Answer: {}", answer);
 }
@@ -49,7 +50,10 @@ fn part1(input_file: String) {
 fn part2_fail(input_file: String) {
     let answer: usize;
     let mut binary_vec_str: Vec<&str> = input_file.split("\n").collect();
-    if binary_vec_str.last().unwrap().to_owned() == "" { binary_vec_str.pop(); } // remove the last element if it's empty
+    if binary_vec_str.last().unwrap().to_owned() == "" {
+        // remove the last element if it's empty
+        binary_vec_str.pop();
+    }
     let mut binary_vec_str_copy: Vec<&str> = binary_vec_str.to_owned();
     dbg!(&binary_vec_str);
 
@@ -60,8 +64,7 @@ fn part2_fail(input_file: String) {
         for digit_index in 0..number.len() {
             if number.chars().nth(digit_index).unwrap() == '0' {
                 dominating_vec[digit_index] -= 1;
-            }
-            else {
+            } else {
                 dominating_vec[digit_index] += 1;
             }
         }
@@ -71,8 +74,7 @@ fn part2_fail(input_file: String) {
     for value in &dominating_vec {
         if value > &0 {
             dominating_binary += &"1".to_string();
-        }
-        else {
+        } else {
             dominating_binary += &"0".to_string();
         }
     }
@@ -97,12 +99,10 @@ fn part2_fail(input_file: String) {
     let mut oxygen_generator_rating: String = String::new();
     if binary_vec_str.len() == 1 {
         oxygen_generator_rating = binary_vec_str[0].to_string();
-    }
-    else if binary_vec_str.len() == 2 {
+    } else if binary_vec_str.len() == 2 {
         if binary_vec_str[0].chars().last().unwrap() == '1' {
             oxygen_generator_rating = binary_vec_str[0].to_string();
-        }
-        else {
+        } else {
             oxygen_generator_rating = binary_vec_str[1].to_string();
         }
     }
@@ -112,8 +112,7 @@ fn part2_fail(input_file: String) {
     for digit in dominating_binary.chars() {
         if digit == '0' {
             non_dominating_binary += &"1".to_string();
-        }
-        else {
+        } else {
             non_dominating_binary += &"0".to_string();
         }
     }
@@ -136,12 +135,10 @@ fn part2_fail(input_file: String) {
     let mut co2_scrubber_rating: String = String::new();
     if binary_vec_str_copy.len() == 1 {
         co2_scrubber_rating = binary_vec_str_copy[0].to_string();
-    }
-    else if binary_vec_str_copy.len() == 2 {
+    } else if binary_vec_str_copy.len() == 2 {
         if binary_vec_str_copy[0].chars().last().unwrap() == '0' {
             co2_scrubber_rating = binary_vec_str_copy[0].to_string();
-        }
-        else {
+        } else {
             co2_scrubber_rating = binary_vec_str_copy[1].to_string();
         }
     }
@@ -150,7 +147,8 @@ fn part2_fail(input_file: String) {
     dbg!(dominating_binary);
     dbg!(non_dominating_binary);
 
-    answer = usize::from_str_radix(&oxygen_generator_rating, 2).unwrap() * usize::from_str_radix(&co2_scrubber_rating, 2).unwrap();
+    answer = usize::from_str_radix(&oxygen_generator_rating, 2).unwrap()
+        * usize::from_str_radix(&co2_scrubber_rating, 2).unwrap();
 
     println!("Answer: {}", answer);
 }
@@ -158,7 +156,10 @@ fn part2_fail(input_file: String) {
 fn part2_second_try(input_file: String) {
     let answer: usize;
     let mut binary_vec_str: Vec<&str> = input_file.split("\n").collect();
-    if binary_vec_str.last().unwrap().to_owned() == "" { binary_vec_str.pop(); } // remove the last element if it's empty
+    if binary_vec_str.last().unwrap().to_owned() == "" {
+        // remove the last element if it's empty
+        binary_vec_str.pop();
+    }
     let mut binary_vec_str_copy: Vec<&str> = binary_vec_str.to_owned();
 
     let oxygen_generator_rating: String;
@@ -174,16 +175,16 @@ fn part2_second_try(input_file: String) {
         for number_index in 0..binary_vec_str.len() {
             if binary_vec_str[number_index].chars().nth(d_place).unwrap() == '0' {
                 zeros += 1;
-            }
-            else {
+            } else {
                 ones += 1;
             }
         }
 
-        if zeros > ones { // zeros are dominant
+        if zeros > ones {
+            // zeros are dominant
             dominant = 0;
-        }
-        else { // ones are dominant
+        } else {
+            // ones are dominant
             dominant = 1;
         }
 
@@ -205,18 +206,23 @@ fn part2_second_try(input_file: String) {
 
     for d_place in 0..binary_vec_str_copy[0].len() {
         for number_index in 0..binary_vec_str_copy.len() {
-            if binary_vec_str_copy[number_index].chars().nth(d_place).unwrap() == '0' {
+            if binary_vec_str_copy[number_index]
+                .chars()
+                .nth(d_place)
+                .unwrap()
+                == '0'
+            {
                 zeros += 1;
-            }
-            else {
+            } else {
                 ones += 1;
             }
         }
 
-        if zeros > ones { // zeros are dominant
+        if zeros > ones {
+            // zeros are dominant
             dominant = 0;
-        }
-        else { // ones are dominant
+        } else {
+            // ones are dominant
             dominant = 1;
         }
 
@@ -235,7 +241,8 @@ fn part2_second_try(input_file: String) {
     }
     co2_scrubber_rating = tmp_vec.last().unwrap().to_string();
 
-    answer = usize::from_str_radix(&oxygen_generator_rating, 2).unwrap() * usize::from_str_radix(&co2_scrubber_rating, 2).unwrap();
+    answer = usize::from_str_radix(&oxygen_generator_rating, 2).unwrap()
+        * usize::from_str_radix(&co2_scrubber_rating, 2).unwrap();
 
     println!("Answer: {}", answer);
 }
@@ -245,7 +252,11 @@ fn main() {
 
     let input_file: String = read_to_string("input.txt").unwrap();
 
-    if part == 1 { part1(input_file); }
-    else if part == 2 { part2_second_try(input_file); }
-    else if part == 3 { part2_fail(input_file); }
+    if part == 1 {
+        part1(input_file);
+    } else if part == 2 {
+        part2_second_try(input_file);
+    } else if part == 3 {
+        part2_fail(input_file);
+    }
 }

@@ -1,12 +1,14 @@
 #![allow(dead_code, unused_variables, unused_mut)]
 
-use std::fs::read_to_string;
 use std::collections::HashMap;
+use std::fs::read_to_string;
 
 fn part1(input_file: String) {
     let mut answer: usize = 0;
     let mut lines: Vec<&str> = input_file.split("\n").collect();
-    if lines.last().unwrap().is_empty() { lines.pop(); }
+    if lines.last().unwrap().is_empty() {
+        lines.pop();
+    }
     let opening_brackets: Vec<char> = vec!['(', '[', '{', '<'];
     let mut closing_brackets_lookup: HashMap<char, char> = HashMap::new();
     closing_brackets_lookup.insert(')', '(');
@@ -23,12 +25,10 @@ fn part1(input_file: String) {
         for chr in line.chars() {
             if opening_brackets.contains(&chr) {
                 work_vec.push(chr);
-            }
-            else {
+            } else {
                 if work_vec.last().unwrap() == &closing_brackets_lookup[&chr] {
                     work_vec.pop();
-                }
-                else {
+                } else {
                     answer += points_lookup[&chr];
                     break;
                 }
@@ -43,7 +43,9 @@ fn part2(input_file: String) {
     let answer: usize;
     let mut lines: Vec<&str> = input_file.split("\n").collect();
     let mut incomplete: Vec<&str> = vec![];
-    if lines.last().unwrap().is_empty() { lines.pop(); }
+    if lines.last().unwrap().is_empty() {
+        lines.pop();
+    }
     let opening_brackets: Vec<char> = vec!['(', '[', '{', '<'];
     let mut closing_brackets_lookup: HashMap<char, char> = HashMap::new();
     closing_brackets_lookup.insert(')', '(');
@@ -66,12 +68,10 @@ fn part2(input_file: String) {
         for chr in line.chars() {
             if opening_brackets.contains(&chr) {
                 work_vec.push(chr);
-            }
-            else {
+            } else {
                 if work_vec.last().unwrap() == &closing_brackets_lookup[&chr] {
                     work_vec.pop();
-                }
-                else {
+                } else {
                     corrupted = true;
                 }
             }
@@ -87,8 +87,7 @@ fn part2(input_file: String) {
         for chr in line.chars() {
             if opening_brackets.contains(&chr) {
                 work_vec.push(chr);
-            }
-            else {
+            } else {
                 if work_vec.last().unwrap() == &closing_brackets_lookup[&chr] {
                     work_vec.pop();
                 }
@@ -107,7 +106,7 @@ fn part2(input_file: String) {
         complete_vec.clear();
     }
     scores_vec.sort();
-    answer = scores_vec[(scores_vec.len()-1)/2];
+    answer = scores_vec[(scores_vec.len() - 1) / 2];
     println!("Answer: {}", answer);
 }
 
@@ -116,6 +115,9 @@ fn main() {
 
     let input_file: String = read_to_string("input.txt").unwrap();
 
-    if part == 1 { part1(input_file); }
-    else if part == 2 { part2(input_file); }
+    if part == 1 {
+        part1(input_file);
+    } else if part == 2 {
+        part2(input_file);
+    }
 }

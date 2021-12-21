@@ -5,8 +5,14 @@ use std::fs::read_to_string;
 fn part1(input_file: String) {
     let mut answer: usize = 0;
     let mut numbers_vec_str: Vec<&str> = input_file.split("\n").collect();
-    if numbers_vec_str.last().unwrap().to_owned() == "" { numbers_vec_str.pop(); } // remove the last element if it's empty
-    let numbers_vec: Vec<usize> = numbers_vec_str.iter().map(|number| number.parse::<usize>().unwrap()).collect(); // parse vector of strings as a vector of usize
+    if numbers_vec_str.last().unwrap().to_owned() == "" {
+        // remove the last element if it's empty
+        numbers_vec_str.pop();
+    }
+    let numbers_vec: Vec<usize> = numbers_vec_str // parse vector of strings as a vector of usize
+        .iter()
+        .map(|number| number.parse::<usize>().unwrap())
+        .collect();
 
     let mut current_number: usize = numbers_vec.first().unwrap().to_owned();
 
@@ -23,13 +29,19 @@ fn part1(input_file: String) {
 fn part2(input_file: String) {
     let mut answer: usize = 0;
     let mut numbers_vec_str: Vec<&str> = input_file.split("\n").collect();
-    if numbers_vec_str.last().unwrap().to_owned() == "" { numbers_vec_str.pop(); } // remove the last element if it's empty
-    let numbers_vec: Vec<usize> = numbers_vec_str.iter().map(|number| number.parse::<usize>().unwrap()).collect(); // parse vector of strings as a vector of usize
+    if numbers_vec_str.last().unwrap().to_owned() == "" {
+        // remove the last element if it's empty
+        numbers_vec_str.pop();
+    }
+    let numbers_vec: Vec<usize> = numbers_vec_str // parse vector of strings as a vector of usize
+        .iter()
+        .map(|number| number.parse::<usize>().unwrap())
+        .collect();
 
     let mut current_result: usize;
     let mut results_vec: Vec<usize> = vec![];
 
-    for number in 0..numbers_vec.len()-2 {
+    for number in 0..numbers_vec.len() - 2 {
         current_result = numbers_vec[number] + numbers_vec[number + 1] + numbers_vec[number + 2];
         results_vec.push(current_result);
     }
@@ -50,6 +62,9 @@ fn main() {
 
     let input_file: String = read_to_string("input.txt").unwrap();
 
-    if part == 1 { part1(input_file); }
-    else if part == 2 { part2(input_file); }
+    if part == 1 {
+        part1(input_file);
+    } else if part == 2 {
+        part2(input_file);
+    }
 }

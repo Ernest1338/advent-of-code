@@ -9,22 +9,62 @@ fn check_board(board: Vec<usize>, numbers: Vec<usize>) -> bool {
     for number_index in 0..board.len() {
         if numbers.contains(&board[number_index]) {
             hit_vec.push("hit");
-        }
-        else {
+        } else {
             hit_vec.push("miss");
         }
     }
 
-    if (hit_vec[0] == "hit" && hit_vec[1] == "hit" && hit_vec[2] == "hit" && hit_vec[3] == "hit" && hit_vec[4] == "hit") ||
-       (hit_vec[5] == "hit" && hit_vec[6] == "hit" && hit_vec[7] == "hit" && hit_vec[8] == "hit" && hit_vec[9] == "hit") ||
-       (hit_vec[10] == "hit" && hit_vec[11] == "hit" && hit_vec[12] == "hit" && hit_vec[13] == "hit" && hit_vec[14] == "hit") ||
-       (hit_vec[15] == "hit" && hit_vec[16] == "hit" && hit_vec[17] == "hit" && hit_vec[18] == "hit" && hit_vec[19] == "hit") ||
-       (hit_vec[20] == "hit" && hit_vec[21] == "hit" && hit_vec[22] == "hit" && hit_vec[23] == "hit" && hit_vec[24] == "hit") ||
-       (hit_vec[0] == "hit" && hit_vec[5] == "hit" && hit_vec[10] == "hit" && hit_vec[15] == "hit" && hit_vec[20] == "hit") ||
-       (hit_vec[1] == "hit" && hit_vec[6] == "hit" && hit_vec[11] == "hit" && hit_vec[16] == "hit" && hit_vec[21] == "hit") ||
-       (hit_vec[2] == "hit" && hit_vec[7] == "hit" && hit_vec[12] == "hit" && hit_vec[17] == "hit" && hit_vec[22] == "hit") ||
-       (hit_vec[3] == "hit" && hit_vec[8] == "hit" && hit_vec[13] == "hit" && hit_vec[18] == "hit" && hit_vec[23] == "hit") ||
-       (hit_vec[4] == "hit" && hit_vec[9] == "hit" && hit_vec[14] == "hit" && hit_vec[19] == "hit" && hit_vec[24] == "hit") {
+    if (hit_vec[0] == "hit"
+        && hit_vec[1] == "hit"
+        && hit_vec[2] == "hit"
+        && hit_vec[3] == "hit"
+        && hit_vec[4] == "hit")
+        || (hit_vec[5] == "hit"
+            && hit_vec[6] == "hit"
+            && hit_vec[7] == "hit"
+            && hit_vec[8] == "hit"
+            && hit_vec[9] == "hit")
+        || (hit_vec[10] == "hit"
+            && hit_vec[11] == "hit"
+            && hit_vec[12] == "hit"
+            && hit_vec[13] == "hit"
+            && hit_vec[14] == "hit")
+        || (hit_vec[15] == "hit"
+            && hit_vec[16] == "hit"
+            && hit_vec[17] == "hit"
+            && hit_vec[18] == "hit"
+            && hit_vec[19] == "hit")
+        || (hit_vec[20] == "hit"
+            && hit_vec[21] == "hit"
+            && hit_vec[22] == "hit"
+            && hit_vec[23] == "hit"
+            && hit_vec[24] == "hit")
+        || (hit_vec[0] == "hit"
+            && hit_vec[5] == "hit"
+            && hit_vec[10] == "hit"
+            && hit_vec[15] == "hit"
+            && hit_vec[20] == "hit")
+        || (hit_vec[1] == "hit"
+            && hit_vec[6] == "hit"
+            && hit_vec[11] == "hit"
+            && hit_vec[16] == "hit"
+            && hit_vec[21] == "hit")
+        || (hit_vec[2] == "hit"
+            && hit_vec[7] == "hit"
+            && hit_vec[12] == "hit"
+            && hit_vec[17] == "hit"
+            && hit_vec[22] == "hit")
+        || (hit_vec[3] == "hit"
+            && hit_vec[8] == "hit"
+            && hit_vec[13] == "hit"
+            && hit_vec[18] == "hit"
+            && hit_vec[23] == "hit")
+        || (hit_vec[4] == "hit"
+            && hit_vec[9] == "hit"
+            && hit_vec[14] == "hit"
+            && hit_vec[19] == "hit"
+            && hit_vec[24] == "hit")
+    {
         result = true;
     }
 
@@ -37,11 +77,17 @@ fn part1(input_file: String) {
     // vec of usize (numbers)
     let answer: usize;
     let input: Vec<&str> = input_file.split("\n\n").collect();
-    let numbers: Vec<usize> = input[0].split(",").map(|n| n.parse::<usize>().unwrap()).collect();
+    let numbers: Vec<usize> = input[0]
+        .split(",")
+        .map(|n| n.parse::<usize>().unwrap())
+        .collect();
     let mut boards: Vec<Vec<usize>> = vec![];
     let mut tmp_board: Vec<usize>;
     for board_index in 1..input.len() {
-        tmp_board = input[board_index].split_whitespace().map(|n| n.parse::<usize>().unwrap()).collect();
+        tmp_board = input[board_index]
+            .split_whitespace()
+            .map(|n| n.parse::<usize>().unwrap())
+            .collect();
         boards.push(tmp_board);
     }
     let mut run: bool = true;
@@ -55,10 +101,13 @@ fn part1(input_file: String) {
                 break;
             }
         }
-        if run == false { last_number_index = number_index-1; break; }
+        if run == false {
+            last_number_index = number_index - 1;
+            break;
+        }
     }
     let mut winning_numbers: Vec<usize> = vec![];
-    for number in 0..last_number_index+1 {
+    for number in 0..last_number_index + 1 {
         winning_numbers.push(numbers[number]);
     }
     let mut sum_of_unmarked: usize = 0;
@@ -76,11 +125,17 @@ fn part1(input_file: String) {
 fn part2(input_file: String) {
     let answer: usize;
     let input: Vec<&str> = input_file.split("\n\n").collect();
-    let numbers: Vec<usize> = input[0].split(",").map(|n| n.parse::<usize>().unwrap()).collect();
+    let numbers: Vec<usize> = input[0]
+        .split(",")
+        .map(|n| n.parse::<usize>().unwrap())
+        .collect();
     let mut boards: Vec<Vec<usize>> = vec![];
     let mut tmp_board: Vec<usize>;
     for board_index in 1..input.len() {
-        tmp_board = input[board_index].split_whitespace().map(|n| n.parse::<usize>().unwrap()).collect();
+        tmp_board = input[board_index]
+            .split_whitespace()
+            .map(|n| n.parse::<usize>().unwrap())
+            .collect();
         boards.push(tmp_board);
     }
     let mut winning_boards: Vec<Vec<usize>> = vec![];
@@ -99,7 +154,9 @@ fn part2(input_file: String) {
                 }
             }
         }
-        if run == false { break; }
+        if run == false {
+            break;
+        }
     }
     let mut winning_numbers: Vec<usize> = vec![];
     for number in 0..last_number_index {
@@ -112,7 +169,7 @@ fn part2(input_file: String) {
         }
     }
 
-    answer = sum_of_unmarked * numbers[last_number_index-1];
+    answer = sum_of_unmarked * numbers[last_number_index - 1];
 
     println!("Answer: {}", answer);
 }
@@ -122,6 +179,9 @@ fn main() {
 
     let input_file: String = read_to_string("input.txt").unwrap();
 
-    if part == 1 { part1(input_file); }
-    else if part == 2 { part2(input_file); }
+    if part == 1 {
+        part1(input_file);
+    } else if part == 2 {
+        part2(input_file);
+    }
 }

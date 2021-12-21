@@ -14,7 +14,9 @@ fn part1(input_file: String) {
     // func strait_line (bool) - case when x1=x2 or y1=y2
     let mut answer: usize = 0;
     let mut input: Vec<&str> = input_file.split("\n").collect();
-    if input.last().unwrap() == &"" { input.pop(); }
+    if input.last().unwrap() == &"" {
+        input.pop();
+    }
 
     let mut points: Vec<Vec<usize>> = vec![];
     let mut tmp_vec: Vec<usize> = vec![];
@@ -34,21 +36,26 @@ fn part1(input_file: String) {
     let mut horizontal: bool;
     for current_points in points {
         if is_strait_line(current_points.to_owned()) {
-            distance = std::cmp::max((current_points[0] as i32 - current_points[2] as i32).abs(), (current_points[1] as i32 - current_points[3] as i32).abs());
+            distance = std::cmp::max(
+                (current_points[0] as i32 - current_points[2] as i32).abs(),
+                (current_points[1] as i32 - current_points[3] as i32).abs(),
+            );
             if current_points[0] != current_points[2] {
                 horizontal = true;
-            }
-            else {
+            } else {
                 horizontal = false;
             }
-            if horizontal { // of index 1 and 3 are the same
+            if horizontal {
+                // of index 1 and 3 are the same
                 for i in 0..=distance {
-                    plane[current_points[1]][std::cmp::min(current_points[0], current_points[2]) + i as usize] += 1;
+                    plane[current_points[1]]
+                        [std::cmp::min(current_points[0], current_points[2]) + i as usize] += 1;
                 }
-            }
-            else { // of index 0 and 2 are the same
+            } else {
+                // of index 0 and 2 are the same
                 for i in 0..=distance {
-                    plane[std::cmp::min(current_points[1], current_points[3]) + i as usize][current_points[0]] += 1;
+                    plane[std::cmp::min(current_points[1], current_points[3]) + i as usize]
+                        [current_points[0]] += 1;
                 }
             }
         }
@@ -68,7 +75,9 @@ fn part1(input_file: String) {
 fn part2(input_file: String) {
     let mut answer: usize = 0;
     let mut input: Vec<&str> = input_file.split("\n").collect();
-    if input.last().unwrap() == &"" { input.pop(); }
+    if input.last().unwrap() == &"" {
+        input.pop();
+    }
 
     let mut points: Vec<Vec<usize>> = vec![];
     let mut tmp_vec: Vec<usize> = vec![];
@@ -90,40 +99,46 @@ fn part2(input_file: String) {
     let mut y_neg: i32;
     for current_points in points {
         if is_strait_line(current_points.to_owned()) {
-            distance = std::cmp::max((current_points[0] as i32 - current_points[2] as i32).abs(), (current_points[1] as i32 - current_points[3] as i32).abs());
+            distance = std::cmp::max(
+                (current_points[0] as i32 - current_points[2] as i32).abs(),
+                (current_points[1] as i32 - current_points[3] as i32).abs(),
+            );
             if current_points[0] != current_points[2] {
                 horizontal = true;
-            }
-            else {
+            } else {
                 horizontal = false;
             }
-            if horizontal { // of index 1 and 3 are the same
+            if horizontal {
+                // of index 1 and 3 are the same
                 for i in 0..=distance {
-                    plane[current_points[1]][std::cmp::min(current_points[0], current_points[2]) + i as usize] += 1;
+                    plane[current_points[1]]
+                        [std::cmp::min(current_points[0], current_points[2]) + i as usize] += 1;
+                }
+            } else {
+                // of index 0 and 2 are the same
+                for i in 0..=distance {
+                    plane[std::cmp::min(current_points[1], current_points[3]) + i as usize]
+                        [current_points[0]] += 1;
                 }
             }
-            else { // of index 0 and 2 are the same
-                for i in 0..=distance {
-                    plane[std::cmp::min(current_points[1], current_points[3]) + i as usize][current_points[0]] += 1;
-                }
-            }
-        }
-        else {
-            distance = std::cmp::max((current_points[0] as i32 - current_points[2] as i32).abs(), (current_points[1] as i32 - current_points[3] as i32).abs());
+        } else {
+            distance = std::cmp::max(
+                (current_points[0] as i32 - current_points[2] as i32).abs(),
+                (current_points[1] as i32 - current_points[3] as i32).abs(),
+            );
             if current_points[0] > current_points[2] {
                 y_neg = -1;
-            }
-            else {
+            } else {
                 y_neg = 1;
             }
             if current_points[1] > current_points[3] {
                 x_neg = -1;
-            }
-            else {
+            } else {
                 x_neg = 1;
             }
             for i in 0..=distance {
-                plane[(current_points[1] as i32 + (i as i32 * x_neg)) as usize][(current_points[0] as i32 + (i as i32 * y_neg)) as usize] += 1;
+                plane[(current_points[1] as i32 + (i as i32 * x_neg)) as usize]
+                    [(current_points[0] as i32 + (i as i32 * y_neg)) as usize] += 1;
             }
         }
     }
@@ -144,6 +159,9 @@ fn main() {
 
     let input_file: String = read_to_string("input.txt").unwrap();
 
-    if part == 1 { part1(input_file); }
-    else if part == 2 { part2(input_file); }
+    if part == 1 {
+        part1(input_file);
+    } else if part == 2 {
+        part2(input_file);
+    }
 }

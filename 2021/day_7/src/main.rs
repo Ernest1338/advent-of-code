@@ -3,7 +3,13 @@
 use std::fs::read_to_string;
 
 fn part1(input_file: String) {
-    let crabs: Vec<usize> = input_file.trim().split(",").collect::<Vec<&str>>().iter().map(|n| n.parse::<usize>().unwrap()).collect();
+    let crabs: Vec<usize> = input_file
+        .trim()
+        .split(",")
+        .collect::<Vec<&str>>()
+        .iter()
+        .map(|n| n.parse::<usize>().unwrap())
+        .collect();
     let mut fuel_costs: Vec<usize> = vec![];
     let positions_to_test: usize = 500;
     let mut cur_fuel_cost: usize = 0;
@@ -19,7 +25,13 @@ fn part1(input_file: String) {
 }
 
 fn part2(input_file: String) {
-    let crabs: Vec<usize> = input_file.trim().split(",").collect::<Vec<&str>>().iter().map(|n| n.parse::<usize>().unwrap()).collect();
+    let crabs: Vec<usize> = input_file
+        .trim()
+        .split(",")
+        .collect::<Vec<&str>>()
+        .iter()
+        .map(|n| n.parse::<usize>().unwrap())
+        .collect();
     let mut fuel_costs: Vec<usize> = vec![];
     let positions_to_test: usize = 500;
     let mut cur_fuel_cost: usize = 0;
@@ -43,6 +55,9 @@ fn main() {
 
     let input_file: String = read_to_string("input.txt").unwrap();
 
-    if part == 1 { part1(input_file); }
-    else if part == 2 { part2(input_file); }
+    if part == 1 {
+        part1(input_file);
+    } else if part == 2 {
+        part2(input_file);
+    }
 }

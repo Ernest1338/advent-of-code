@@ -4,7 +4,19 @@ use std::fs::read_to_string;
 
 fn part1(input_file: String) {
     let mut answer: usize = 0;
-    let mut connections_and_digits: Vec<Vec<Vec<&str>>> = input_file.trim().split("\n").collect::<Vec<&str>>().iter().map(|s| s.split(" | ").collect::<Vec<&str>>().iter().map(|x| x.split(" ").collect::<Vec<&str>>()).collect()).collect();
+    let mut connections_and_digits: Vec<Vec<Vec<&str>>> = input_file
+        .trim()
+        .split("\n")
+        .collect::<Vec<&str>>()
+        .iter()
+        .map(|s| {
+            s.split(" | ")
+                .collect::<Vec<&str>>()
+                .iter()
+                .map(|x| x.split(" ").collect::<Vec<&str>>())
+                .collect()
+        })
+        .collect();
     let mut digits: Vec<&str> = vec![];
     for i in 0..connections_and_digits.len() {
         for digit in connections_and_digits[i][1].iter() {
@@ -24,7 +36,19 @@ fn part2(input_file: String) {
     // TODO: simplify the solution by creating a vec diff function
     let mut answer: String = String::new();
     let mut final_answer: usize = 0;
-    let mut connections_and_digits: Vec<Vec<Vec<&str>>> = input_file.trim().split("\n").collect::<Vec<&str>>().iter().map(|s| s.split(" | ").collect::<Vec<&str>>().iter().map(|x| x.split(" ").collect::<Vec<&str>>()).collect()).collect();
+    let mut connections_and_digits: Vec<Vec<Vec<&str>>> = input_file
+        .trim()
+        .split("\n")
+        .collect::<Vec<&str>>()
+        .iter()
+        .map(|s| {
+            s.split(" | ")
+                .collect::<Vec<&str>>()
+                .iter()
+                .map(|x| x.split(" ").collect::<Vec<&str>>())
+                .collect()
+        })
+        .collect();
     let mut connections: Vec<&str>;
     let mut digits: Vec<&str>;
     for message in connections_and_digits {
@@ -40,27 +64,60 @@ fn part2(input_file: String) {
 
         for digit in &connections {
             match digit.len() {
-                2 => for chr in digit.chars() { one.push(chr); },
-                4 => for chr in digit.chars() { four.push(chr); },
-                3 => for chr in digit.chars() { seven.push(chr); },
-                7 => for chr in digit.chars() { eight.push(chr); },
+                2 => {
+                    for chr in digit.chars() {
+                        one.push(chr);
+                    }
+                }
+                4 => {
+                    for chr in digit.chars() {
+                        four.push(chr);
+                    }
+                }
+                3 => {
+                    for chr in digit.chars() {
+                        seven.push(chr);
+                    }
+                }
+                7 => {
+                    for chr in digit.chars() {
+                        eight.push(chr);
+                    }
+                }
                 _ => continue,
             }
         }
 
-        for chr in &seven { if !one.contains(&chr) { segments[0] = chr.to_owned(); } } // top segment
+        for chr in &seven {
+            if !one.contains(&chr) {
+                segments[0] = chr.to_owned();
+            }
+        } // top segment
 
         let mut four_one_dif: Vec<char> = vec![];
-        for chr in &four { if !one.contains(&chr) { four_one_dif.push(chr.to_owned()); } }
+        for chr in &four {
+            if !one.contains(&chr) {
+                four_one_dif.push(chr.to_owned());
+            }
+        }
 
         for digit in &connections {
-            if digit.len() == 5 { // 3
+            if digit.len() == 5 {
+                // 3
                 if digit.contains(one[0]) && digit.contains(one[1]) && digit.contains(segments[0]) {
                     if digit.contains(four_one_dif[0]) || digit.contains(four_one_dif[1]) {
-                        if digit.contains(four_one_dif[0]) { segments[3] = four_one_dif[0]; } // middle segment
-                        else if digit.contains(four_one_dif[1]) { segments[3] = four_one_dif[1]; } // middle segment
+                        if digit.contains(four_one_dif[0]) {
+                            segments[3] = four_one_dif[0];
+                        }
+                        // middle segment
+                        else if digit.contains(four_one_dif[1]) {
+                            segments[3] = four_one_dif[1];
+                        } // middle segment
                         for chr in digit.to_owned().chars() {
-                            if !one.contains(&chr) && !four_one_dif.contains(&chr) && chr != segments[0] {
+                            if !one.contains(&chr)
+                                && !four_one_dif.contains(&chr)
+                                && chr != segments[0]
+                            {
                                 segments[6] = chr; // bottom segment
                             }
                         }
@@ -70,10 +127,19 @@ fn part2(input_file: String) {
         }
 
         for digit in &connections {
-            if digit.len() == 5 { // 5
-                if digit.contains(segments[0]) && digit.contains(segments[6]) && digit.contains(four_one_dif[0]) && digit.contains(four_one_dif[1]) {
+            if digit.len() == 5 {
+                // 5
+                if digit.contains(segments[0])
+                    && digit.contains(segments[6])
+                    && digit.contains(four_one_dif[0])
+                    && digit.contains(four_one_dif[1])
+                {
                     for chr in digit.to_owned().chars() {
-                        if chr != segments[0] && chr != segments[6] && chr != four_one_dif[0] && chr != four_one_dif[1] {
+                        if chr != segments[0]
+                            && chr != segments[6]
+                            && chr != four_one_dif[0]
+                            && chr != four_one_dif[1]
+                        {
                             segments[5] = chr; // bottom right segment
                         }
                     }
@@ -81,14 +147,28 @@ fn part2(input_file: String) {
             }
         }
 
-        for chr in one { if chr != segments[5] { segments[2] = chr; } } // top right segment
+        for chr in one {
+            if chr != segments[5] {
+                segments[2] = chr;
+            }
+        } // top right segment
 
         for digit in &connections {
-            if digit.len() == 5 { // 2
-                if digit.contains(segments[0]) && digit.contains(segments[2]) && digit.contains(segments[6]) {
+            if digit.len() == 5 {
+                // 2
+                if digit.contains(segments[0])
+                    && digit.contains(segments[2])
+                    && digit.contains(segments[6])
+                {
                     if digit.contains(four_one_dif[0]) || digit.contains(four_one_dif[1]) {
                         for chr in digit.to_owned().chars() {
-                            if chr != segments[0] && chr != segments[2] && chr != segments[6] && chr != four_one_dif[0] && chr != four_one_dif[1] && chr != segments[5] {
+                            if chr != segments[0]
+                                && chr != segments[2]
+                                && chr != segments[6]
+                                && chr != four_one_dif[0]
+                                && chr != four_one_dif[1]
+                                && chr != segments[5]
+                            {
                                 segments[4] = chr; // bottom left segment
                             }
                         }
@@ -98,7 +178,8 @@ fn part2(input_file: String) {
         }
 
         for digit in &connections {
-            if digit.len() == 7 { // 8
+            if digit.len() == 7 {
+                // 8
                 for chr in digit.to_owned().chars() {
                     if !segments.contains(&chr) {
                         segments[1] = chr;
@@ -107,16 +188,46 @@ fn part2(input_file: String) {
             }
         }
 
-        digit_lookup_vec.push(format!("{}{}{}{}{}{}", segments[0], segments[1], segments[2], segments[4], segments[5], segments[6]));
+        digit_lookup_vec.push(format!(
+            "{}{}{}{}{}{}",
+            segments[0], segments[1], segments[2], segments[4], segments[5], segments[6]
+        ));
         digit_lookup_vec.push(format!("{}{}", segments[2], segments[5]));
-        digit_lookup_vec.push(format!("{}{}{}{}{}", segments[0], segments[2], segments[3], segments[4], segments[6]));
-        digit_lookup_vec.push(format!("{}{}{}{}{}", segments[0], segments[2], segments[3], segments[5], segments[6]));
-        digit_lookup_vec.push(format!("{}{}{}{}", segments[1], segments[2], segments[3], segments[5]));
-        digit_lookup_vec.push(format!("{}{}{}{}{}", segments[0], segments[1], segments[3], segments[5], segments[6]));
-        digit_lookup_vec.push(format!("{}{}{}{}{}{}", segments[0], segments[1], segments[3], segments[4], segments[5], segments[6]));
+        digit_lookup_vec.push(format!(
+            "{}{}{}{}{}",
+            segments[0], segments[2], segments[3], segments[4], segments[6]
+        ));
+        digit_lookup_vec.push(format!(
+            "{}{}{}{}{}",
+            segments[0], segments[2], segments[3], segments[5], segments[6]
+        ));
+        digit_lookup_vec.push(format!(
+            "{}{}{}{}",
+            segments[1], segments[2], segments[3], segments[5]
+        ));
+        digit_lookup_vec.push(format!(
+            "{}{}{}{}{}",
+            segments[0], segments[1], segments[3], segments[5], segments[6]
+        ));
+        digit_lookup_vec.push(format!(
+            "{}{}{}{}{}{}",
+            segments[0], segments[1], segments[3], segments[4], segments[5], segments[6]
+        ));
         digit_lookup_vec.push(format!("{}{}{}", segments[0], segments[2], segments[5]));
-        digit_lookup_vec.push(format!("{}{}{}{}{}{}{}", segments[0], segments[1], segments[2], segments[3], segments[4], segments[5], segments[6]));
-        digit_lookup_vec.push(format!("{}{}{}{}{}{}", segments[0], segments[1], segments[2], segments[3], segments[5], segments[6]));
+        digit_lookup_vec.push(format!(
+            "{}{}{}{}{}{}{}",
+            segments[0],
+            segments[1],
+            segments[2],
+            segments[3],
+            segments[4],
+            segments[5],
+            segments[6]
+        ));
+        digit_lookup_vec.push(format!(
+            "{}{}{}{}{}{}",
+            segments[0], segments[1], segments[2], segments[3], segments[5], segments[6]
+        ));
 
         let mut tmp_vec1: Vec<String>;
         let mut tmp_vec2: Vec<String>;
@@ -129,7 +240,10 @@ fn part2(input_file: String) {
                         yes = false;
                     }
                 }
-                if yes && digit.len() == digit_lookup_vec[diglookup_index].len() { final_num = diglookup_index; break; }
+                if yes && digit.len() == digit_lookup_vec[diglookup_index].len() {
+                    final_num = diglookup_index;
+                    break;
+                }
             }
             answer += &final_num.to_string();
         }
@@ -148,6 +262,9 @@ fn main() {
 
     let input_file: String = read_to_string("input.txt").unwrap();
 
-    if part == 1 { part1(input_file); }
-    else if part == 2 { part2(input_file); }
+    if part == 1 {
+        part1(input_file);
+    } else if part == 2 {
+        part2(input_file);
+    }
 }

@@ -13,11 +13,10 @@ fn vec_usize_count(vec: Vec<usize>) -> usize {
 fn vec_cycle(vec: Vec<usize>) -> Vec<usize> {
     let mut result_vec: Vec<usize> = vec.to_owned();
     for i in 0..vec.len() {
-        if i+1 == vec.len() {
+        if i + 1 == vec.len() {
             result_vec[i] = vec[0];
-        }
-        else {
-            result_vec[i] = vec[i+1];
+        } else {
+            result_vec[i] = vec[i + 1];
         }
     }
     return result_vec;
@@ -26,15 +25,17 @@ fn vec_cycle(vec: Vec<usize>) -> Vec<usize> {
 fn part1(input_file: String) {
     let answer: usize;
     let initial_state_str: &str = &input_file.trim();
-    let mut lanternfishes: Vec<u8> = initial_state_str.split(",").map(|n| n.parse::<u8>().unwrap()).collect();
+    let mut lanternfishes: Vec<u8> = initial_state_str
+        .split(",")
+        .map(|n| n.parse::<u8>().unwrap())
+        .collect();
     let mut fishes_to_add: Vec<u8> = vec![];
     let number_of_days: u8 = 80;
     for _day in 0..number_of_days {
         for fish_index in 0..lanternfishes.len() {
             if lanternfishes[fish_index] > 0 {
                 lanternfishes[fish_index] -= 1;
-            }
-            else {
+            } else {
                 lanternfishes[fish_index] = 6;
                 fishes_to_add.push(8);
             }
@@ -51,7 +52,11 @@ fn part1(input_file: String) {
 fn part2(input_file: String) {
     let answer: usize;
     let mut fish_timer_lookup: Vec<usize> = vec![0; 9];
-    let initial_state: Vec<u8> = input_file.trim().split(",").map(|n| n.parse::<u8>().unwrap()).collect();
+    let initial_state: Vec<u8> = input_file
+        .trim()
+        .split(",")
+        .map(|n| n.parse::<u8>().unwrap())
+        .collect();
     for fish_timer in initial_state {
         fish_timer_lookup[fish_timer as usize] += 1;
     }
@@ -72,6 +77,9 @@ fn main() {
 
     let input_file: String = read_to_string("input.txt").unwrap();
 
-    if part == 1 { part1(input_file); }
-    else if part == 2 { part2(input_file); }
+    if part == 1 {
+        part1(input_file);
+    } else if part == 2 {
+        part2(input_file);
+    }
 }
