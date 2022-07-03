@@ -19,7 +19,11 @@ pub fn load_file(file_name: &str) -> String {
 // reading file into vector of lines (strings)
 pub fn load_file_lines(file_name: &str) -> Vec<String> {
     let file: String = load_file(file_name);
-    file.split('\n').map(|x| x.to_string()).collect()
+    let mut file_lines: Vec<String> = file.split('\n').map(|x| x.to_string()).collect();
+    if file_lines.last().unwrap().is_empty() {
+        file_lines.pop();
+    }
+    file_lines
 }
 
 // print answer (usize)
