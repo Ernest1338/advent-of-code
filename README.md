@@ -2,10 +2,10 @@
 
 ## Info
 
-### 2021:
+### 2020:
 - lang used: Python3
 - first time participating :)
 
-### 2022:
+### 2021:
 - lang used: Rust
 
