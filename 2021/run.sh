@@ -16,6 +16,7 @@ then
     touch "./day_$day/input.txt" &&
     touch "./day_$day/sample.txt" &&
     cat "./template.rs" > "day_$day/src/main.rs" &&
+    echo "aoc_std = { path = \"../../aoc_std/\" }" >> "day_$day/Cargo.toml" &&
     echo "[!] created the file structure"
 fi
 
