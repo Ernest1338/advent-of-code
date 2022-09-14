@@ -10,7 +10,7 @@ fn prand_bool() -> bool {
     for index in 0..prand_usize.to_string().len() {
         prand_sum += prand_usize / (10 ^ index) % 10;
     }
-    if prand_sum%2==1 {
+    if prand_sum % 2 == 1 {
         out_bool = false;
     }
     return out_bool;
@@ -26,8 +26,7 @@ fn part1_naive(map: Vec<Vec<u8>>) -> usize {
         dbg!(prand_bool());
         if prand_bool() {
             position.0 += 1;
-        }
-        else {
+        } else {
             position.1 += 1;
         }
     }
@@ -75,8 +74,7 @@ fn part1(input_file: String) {
         let mut num: usize;
         if i == 0 {
             num = 0;
-        }
-        else {
+        } else {
             num = x[0] as usize;
         }
         let mut tmp_element: Vec<usize> = vec![];

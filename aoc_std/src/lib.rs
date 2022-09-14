@@ -5,7 +5,6 @@ print answer
 ...
 */
 
-
 use std::fs::read_to_string;
 
 // safely reading file into string and returning it
