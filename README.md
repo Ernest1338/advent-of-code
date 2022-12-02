@@ -9,3 +9,6 @@
 ### 2021:
 - lang used: Rust
 
+### 2022:
+- lang used: Rust
+
