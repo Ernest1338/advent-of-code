@@ -6,7 +6,7 @@ fn part1(input_file: String) {
     let mut score: usize = 0;
     let input_file = input_file.trim();
     for line in input_file.split('\n').collect::<Vec<&str>>() {
-        let oponnent = line.chars().nth(0).unwrap();
+        let oponnent = line.chars().next().unwrap();
         let response = line.chars().nth(2).unwrap();
         // dbg!(&oponnent, &response);
         match oponnent {
@@ -89,7 +89,7 @@ fn part2(input_file: String) {
     let mut score: usize = 0;
     let input_file = input_file.trim();
     for line in input_file.split('\n').collect::<Vec<&str>>() {
-        let oponnent = line.chars().nth(0).unwrap();
+        let oponnent = line.chars().next().unwrap();
         let response = line.chars().nth(2).unwrap();
         // dbg!(&oponnent, &response);
         match oponnent {

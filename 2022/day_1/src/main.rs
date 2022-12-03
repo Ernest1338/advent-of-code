@@ -7,7 +7,7 @@ fn part1(input_file: String) {
     let mut sum = 0;
     let mut highest = 0;
     for line in input_file.split('\n') {
-        if line != "" {
+        if !line.is_empty() {
             sum += line.parse::<usize>().unwrap_or(0);
         } else {
             if sum > highest {
@@ -25,7 +25,7 @@ fn part2(input_file: String) {
     let mut sum = 0;
     let mut highest_list = vec![];
     for line in input_file.split('\n') {
-        if line != "" {
+        if !line.is_empty() {
             sum += line.parse::<usize>().unwrap_or(0);
         } else {
             highest_list.push(sum);

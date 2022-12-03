@@ -47,11 +47,9 @@ fn part2(input_file: String) {
         let second = lines[i + 1];
         let third = lines[i + 2];
         for item in first.chars() {
-            if second.contains(item) {
-                if third.contains(item) {
-                    answer += value_of(item);
-                    break;
-                }
+            if second.contains(item) && third.contains(item) {
+                answer += value_of(item);
+                break;
             }
         }
     }
