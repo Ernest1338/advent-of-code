@@ -3,15 +3,14 @@
 use aoc_std::*;
 
 fn value_of(item: char) -> usize {
-    let lower = ('a'..='z').into_iter().collect::<Vec<char>>();
-    let upper = ('A'..='Z').into_iter().collect::<Vec<char>>();
-    if lower.contains(&item) {
-        lower.iter().position(|&e| e == item).unwrap() + 1
-    } else if upper.contains(&item) {
-        upper.iter().position(|&e| e == item).unwrap() + 27
-    } else {
-        0
+    let chars = ('a'..='z')
+        .chain('A'..='Z')
+        .into_iter()
+        .collect::<Vec<char>>();
+    if chars.contains(&item) {
+        return chars.iter().position(|&e| e == item).unwrap() + 1;
     }
+    0
 }
 
 fn part1(input_file: String) {
