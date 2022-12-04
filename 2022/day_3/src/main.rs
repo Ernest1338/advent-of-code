@@ -13,7 +13,7 @@ fn value_of(item: char) -> usize {
     0
 }
 
-fn part1(input_file: String) {
+fn part1(input_file: String) -> usize {
     let mut answer: usize = 0;
     let input_file = input_file.trim();
     for line in input_file.split('\n').collect::<Vec<&str>>() {
@@ -28,10 +28,10 @@ fn part1(input_file: String) {
             }
         }
     }
-    print_answer(answer);
+    answer
 }
 
-fn part2(input_file: String) {
+fn part2(input_file: String) -> usize {
     let mut answer: usize = 0;
     let input_file = input_file.trim();
     let lines = input_file.split('\n').collect::<Vec<&str>>();
@@ -46,7 +46,7 @@ fn part2(input_file: String) {
             }
         }
     }
-    print_answer(answer);
+    answer
 }
 
 fn main() {
@@ -55,8 +55,8 @@ fn main() {
     let input_file = load_file("input.txt");
 
     if part == 1 {
-        part1(input_file);
+        print_answer(part1(input_file));
     } else if part == 2 {
-        part2(input_file);
+        print_answer(part2(input_file));
     }
 }
