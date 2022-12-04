@@ -3,14 +3,8 @@
 use aoc_std::*;
 
 fn value_of(item: char) -> usize {
-    let lower = [
-        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-        's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    ];
-    let upper = [
-        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-        'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-    ];
+    let lower = ('a'..='z').into_iter().collect::<Vec<char>>();
+    let upper = ('A'..='Z').into_iter().collect::<Vec<char>>();
     if lower.contains(&item) {
         lower.iter().position(|&e| e == item).unwrap() + 1
     } else if upper.contains(&item) {
