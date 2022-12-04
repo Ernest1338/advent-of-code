@@ -2,8 +2,7 @@
 
 use aoc_std::*;
 
-fn part1(input_file: String) {
-    let mut answer: usize;
+fn part1(input_file: String) -> usize {
     let mut sum = 0;
     let mut highest = 0;
     for line in input_file.split('\n') {
@@ -16,12 +15,10 @@ fn part1(input_file: String) {
             sum = 0;
         }
     }
-    answer = highest;
-    print_answer(answer);
+    highest
 }
 
-fn part2(input_file: String) {
-    let mut answer: usize;
+fn part2(input_file: String) -> usize {
     let mut sum = 0;
     let mut highest_list = vec![];
     for line in input_file.split('\n') {
@@ -34,8 +31,7 @@ fn part2(input_file: String) {
     }
     highest_list.sort();
     highest_list.reverse();
-    answer = highest_list[0] + highest_list[1] + highest_list[2];
-    print_answer(answer);
+    highest_list[0] + highest_list[1] + highest_list[2]
 }
 
 fn main() {
@@ -44,8 +40,8 @@ fn main() {
     let input_file = load_file("input.txt");
 
     if part == 1 {
-        part1(input_file);
+        print_answer(part1(input_file));
     } else if part == 2 {
-        part2(input_file);
+        print_answer(part2(input_file));
     }
 }
