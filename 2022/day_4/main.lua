@@ -10,9 +10,13 @@ local function split(inputstr, sep)
     if sep == nil then
         sep = "%s"
     end
-    local t={}
-    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-        table.insert(t, str)
+    local t = {}
+    for str in string.gmatch(inputstr, "([^" .. sep .. "]+)") do
+        if tonumber(str) ~= nil then
+            table.insert(t, tonumber(str))
+        else
+            table.insert(t, str)
+        end
     end
     return t
 end
@@ -29,12 +33,10 @@ end
 local function part1(lines)
     local sum = 0
     for _, line in pairs(lines) do
-        local left = split(line, ',')[1]
-        local left_split = split(left, '-')
-        local right = split(line, ',')[2]
-        local right_split = split(right, '-')
-        if (tonumber(left_split[1]) <= tonumber(right_split[1]) and tonumber(left_split[2]) >= tonumber(right_split[2]))
-            or (tonumber(right_split[1]) <= tonumber(left_split[1]) and tonumber(right_split[2]) >= tonumber(left_split[2])) then
+        local left_split = split(split(line, ',')[1], '-')
+        local right_split = split(split(line, ',')[2], '-')
+        if (left_split[1] <= right_split[1] and left_split[2] >= right_split[2])
+            or (right_split[1] <= left_split[1] and right_split[2] >= left_split[2]) then
             sum = sum + 1
         end
     end
@@ -44,10 +46,8 @@ end
 local function part2(lines)
     local sum = 0
     for _, line in pairs(lines) do
-        local left = split(line, ',')[1]
-        local left_split = split(left, '-')
-        local right = split(line, ',')[2]
-        local right_split = split(right, '-')
+        local left_split = split(split(line, ',')[1], '-')
+        local right_split = split(split(line, ',')[2], '-')
         if (range_contains(right_split, left_split[1]) or range_contains(right_split, left_split[2]))
             or (range_contains(left_split, right_split[1]) or range_contains(left_split, right_split[2])) then
             sum = sum + 1
