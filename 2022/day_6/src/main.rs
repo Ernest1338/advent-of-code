@@ -2,14 +2,14 @@
 
 use aoc_std::*;
 
-fn find_header(input: &str, num_of_uniqe: usize) -> usize {
+fn find_header(input: &str, num_of_unique: usize) -> usize {
     let chrs: Vec<_> = input.trim().chars().collect();
-    for (i, chunk) in chrs.windows(num_of_uniqe).enumerate() {
+    for (i, chunk) in chrs.windows(num_of_unique).enumerate() {
         let mut deduped = chunk.to_vec();
         deduped.sort();
         deduped.dedup();
-        if deduped.len() == num_of_uniqe {
-            return i + num_of_uniqe;
+        if deduped.len() == num_of_unique {
+            return i + num_of_unique;
         }
     }
     0
