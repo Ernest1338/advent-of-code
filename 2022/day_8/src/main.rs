@@ -23,13 +23,13 @@ fn part1(input_file: String) -> usize {
             let mut highest_right = -1;
             let left_range = 0..y;
             for c in left_range {
-                if &grid[x][c] > &highest_left {
+                if grid[x][c] > highest_left {
                     highest_left = grid[x][c];
                 }
             }
             let right_range = y + 1..size;
             for c in right_range {
-                if &grid[x][c] > &highest_right {
+                if grid[x][c] > highest_right {
                     highest_right = grid[x][c];
                 }
             }
@@ -38,13 +38,13 @@ fn part1(input_file: String) -> usize {
             let mut highest_down = -1;
             let top_range = 0..x;
             for c in top_range {
-                if &grid[c][y] > &highest_top {
+                if grid[c][y] > highest_top {
                     highest_top = grid[c][y];
                 }
             }
             let down_range = x + 1..size;
             for c in down_range {
-                if &grid[c][y] > &highest_down {
+                if grid[c][y] > highest_down {
                     highest_down = grid[c][y];
                 }
             }
@@ -82,7 +82,7 @@ fn part2(input_file: String) -> usize {
             let mut view_right = 0;
             let left_range = (0..y).rev();
             for c in left_range {
-                if &grid[x][c] < &val {
+                if grid[x][c] < val {
                     view_left += 1;
                 } else {
                     view_left += 1;
@@ -91,7 +91,7 @@ fn part2(input_file: String) -> usize {
             }
             let right_range = y + 1..size;
             for c in right_range {
-                if &grid[x][c] < &val {
+                if grid[x][c] < val {
                     view_right += 1;
                 } else {
                     view_right += 1;
@@ -103,7 +103,7 @@ fn part2(input_file: String) -> usize {
             let mut view_down = 0;
             let up_range = (0..x).rev();
             for c in up_range {
-                if &grid[c][y] < &val {
+                if grid[c][y] < val {
                     view_up += 1;
                 } else {
                     view_up += 1;
@@ -112,7 +112,7 @@ fn part2(input_file: String) -> usize {
             }
             let down_range = x + 1..size;
             for c in down_range {
-                if &grid[c][y] < &val {
+                if grid[c][y] < val {
                     view_down += 1;
                 } else {
                     view_down += 1;
