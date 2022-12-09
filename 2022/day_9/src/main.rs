@@ -13,6 +13,7 @@ impl Cords {
         Cords { x: 0, y: 0 }
     }
 }
+
 fn are_touching(head: &Cords, tail: &Cords) -> bool {
     (head.x - 1..=head.x + 1).contains(&tail.x) && (head.y - 1..=head.y + 1).contains(&tail.y)
 }
