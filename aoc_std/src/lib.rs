@@ -7,10 +7,10 @@ print answer
 
 use std::fs::read_to_string;
 
-// safely reading file into string and returning it
+// safely reading file into string and returning it (trimmed)
 pub fn load_file(file_name: &str) -> String {
     match read_to_string(file_name) {
-        Ok(ok) => ok,
+        Ok(ok) => ok.trim().to_string(),
         Err(_) => String::from("error reading file"),
     }
 }
