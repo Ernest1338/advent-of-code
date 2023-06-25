@@ -2,189 +2,61 @@
 
 use aoc_std::*;
 
-fn part1(input_file: String) -> usize {
+const SHAPE_SCORE: [(&str, isize); 3] = [("X", 1), ("Y", 2), ("Z", 3)];
+const OPPONENT_SCORE: [(&str, isize); 3] = [("A", 1), ("B", 2), ("C", 3)];
+const OUTCOME_SCORE: [(&str, isize); 3] = [("X", 0), ("Y", 3), ("Z", 6)];
+
+fn get_score(key: &str, map: &[(&str, isize)]) -> isize {
+    map.iter()
+        .find(|&(k, _)| k == &key)
+        .map(|&(_, v)| v)
+        .unwrap()
+}
+
+fn did_win(split: &Vec<&str>) -> usize {
+    let diff = get_score(split[0], &OPPONENT_SCORE) - get_score(split[1], &SHAPE_SCORE);
+    if split == &vec!["C", "X"] {
+        return 6;
+    }
+    match diff {
+        0 => 3,
+        -1 => 6,
+        _ => 0,
+    }
+}
+
+fn part1(file_lines: &Vec<String>) -> usize {
     let mut score: usize = 0;
-    let input_file = input_file.trim();
-    for line in input_file.split('\n').collect::<Vec<&str>>() {
-        let oponnent = line.chars().next().unwrap();
-        let response = line.chars().nth(2).unwrap();
-        // dbg!(&oponnent, &response);
-        match oponnent {
-            'A' => {
-                // rock
-                match response {
-                    'X' => {
-                        // rock
-                        score += 1;
-                        // draw
-                        score += 3;
-                    }
-                    'Y' => {
-                        // paper
-                        score += 2;
-                        // win
-                        score += 6;
-                    }
-                    'Z' => {
-                        // scissors
-                        score += 3;
-                        // loose
-                    }
-                    _ => {}
-                }
-            }
-            'B' => {
-                // paper
-                match response {
-                    'X' => {
-                        // rock
-                        score += 1;
-                        // loose
-                    }
-                    'Y' => {
-                        // paper
-                        score += 2;
-                        // draw
-                        score += 3;
-                    }
-                    'Z' => {
-                        // scissors
-                        score += 3;
-                        // win
-                        score += 6;
-                    }
-                    _ => {}
-                }
-            }
-            'C' => {
-                // scissors
-                match response {
-                    'X' => {
-                        // rock
-                        score += 1;
-                        // win
-                        score += 6;
-                    }
-                    'Y' => {
-                        // paper
-                        score += 2;
-                        // loose
-                    }
-                    'Z' => {
-                        // scissors
-                        score += 3;
-                        // draw
-                        score += 3;
-                    }
-                    _ => {}
-                }
-            }
-            _ => {}
-        }
+    for line in file_lines {
+        let split = line.split(" ").collect::<Vec<&str>>();
+        score += get_score(split[1], &SHAPE_SCORE) as usize + did_win(&split);
     }
     score
 }
 
-fn part2(input_file: String) -> usize {
+fn choice_score(split: &Vec<&str>) -> usize {
+    if split[1] == "X" {
+        let tmp = get_score(split[0], &OPPONENT_SCORE) as usize + 2;
+        return if tmp > 3 { tmp - 3 } else { tmp };
+    } else if split[1] == "Y" {
+        return get_score(split[0], &OPPONENT_SCORE) as usize;
+    }
+    let tmp = get_score(split[0], &OPPONENT_SCORE) as usize + 1;
+    return if tmp > 3 { tmp - 3 } else { tmp };
+}
+
+fn part2(file_lines: &Vec<String>) -> usize {
     let mut score: usize = 0;
-    let input_file = input_file.trim();
-    for line in input_file.split('\n').collect::<Vec<&str>>() {
-        let oponnent = line.chars().next().unwrap();
-        let response = line.chars().nth(2).unwrap();
-        // dbg!(&oponnent, &response);
-        match oponnent {
-            'A' => {
-                // rock
-                match response {
-                    'X' => {
-                        // need to loose
-                        // use: scissors
-                        score += 3;
-                        // loose
-                    }
-                    'Y' => {
-                        // need to draw
-                        // use: rock
-                        score += 1;
-                        // draw
-                        score += 3;
-                    }
-                    'Z' => {
-                        // need to win
-                        // use: paper
-                        score += 2;
-                        // win
-                        score += 6;
-                    }
-                    _ => {}
-                }
-            }
-            'B' => {
-                // paper
-                match response {
-                    'X' => {
-                        // need to loose
-                        // use: rock
-                        score += 1;
-                        // loose
-                    }
-                    'Y' => {
-                        // need to draw
-                        // use: paper
-                        score += 2;
-                        // draw
-                        score += 3;
-                    }
-                    'Z' => {
-                        // need to win
-                        // use: scissors
-                        score += 3;
-                        // win
-                        score += 6;
-                    }
-                    _ => {}
-                }
-            }
-            'C' => {
-                // scissors
-                match response {
-                    'X' => {
-                        // need to loose
-                        // use: paper
-                        score += 2;
-                        // loose
-                    }
-                    'Y' => {
-                        // need to draw
-                        // use: scissors
-                        score += 3;
-                        // draw
-                        score += 3;
-                    }
-                    'Z' => {
-                        // need to win
-                        // use: rock
-                        score += 1;
-                        // win
-                        score += 6;
-                    }
-                    _ => {}
-                }
-            }
-            _ => {}
-        }
+    for line in file_lines {
+        let split = line.split(" ").collect::<Vec<&str>>();
+        score += choice_score(&split) + get_score(split[1], &OUTCOME_SCORE) as usize;
     }
     score
 }
 
 fn main() {
-    let part = 2;
+    let file_lines = load_file_lines("input.txt");
 
-    let input_file = load_file("input.txt");
-
-    if part == 1 {
-        print_answer(part1(input_file));
-    } else if part == 2 {
-        print_answer(part2(input_file));
-    }
+    println!("[Part 1] Answer: {}", part1(&file_lines));
+    println!("[Part 2] Answer: {}", part2(&file_lines));
 }
