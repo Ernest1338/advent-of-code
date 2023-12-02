@@ -63,30 +63,30 @@ fn part2(file: &str) -> usize {
     let mut sum = 0;
     let games = file.lines().map(|l| Game::from(&l)).collect::<Vec<Game>>();
     for game in games {
-        let mut possible = true;
+        let mut max_red = 0;
+        let mut max_green = 0;
+        let mut max_blue = 0;
         for subset in game.subsets {
             match subset.1.as_str() {
                 "red" => {
-                    if subset.0 > 12 {
-                        possible = false;
+                    if subset.0 > max_red {
+                        max_red = subset.0;
                     }
                 }
                 "green" => {
-                    if subset.0 > 13 {
-                        possible = false;
+                    if subset.0 > max_green {
+                        max_green = subset.0;
                     }
                 }
                 "blue" => {
-                    if subset.0 > 14 {
-                        possible = false;
+                    if subset.0 > max_blue {
+                        max_blue = subset.0;
                     }
                 }
                 _ => (),
             }
         }
-        if possible {
-            sum += game.id;
-        }
+        sum += max_red * max_green * max_blue;
     }
     sum
 }
