@@ -15,7 +15,7 @@ fn part2(input_file: &str) -> usize {
 }
 
 fn main() {
-    let input_file = load_file("sample.txt");
+    let input_file = load_file("example.txt");
 
     println!("[Part 1] Answer: {}", part1(&input_file));
     println!("[Part 2] Answer: {}", part2(&input_file));

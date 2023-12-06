@@ -14,7 +14,7 @@ if [ ! -d "./day_$day" ] # directory does not exist, creating the file structure
 then
     cargo new --vcs=none --quiet "day_$day" &&
     touch "./day_$day/input.txt" &&
-    touch "./day_$day/sample.txt" &&
+    touch "./day_$day/example.txt" &&
     cat "./template.rs" > "day_$day/src/main.rs" &&
     echo "aoc_std = { path = \"../../aoc_std/\" }" >> "day_$day/Cargo.toml" &&
     echo "[!] created the file structure"
