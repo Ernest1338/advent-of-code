@@ -1,6 +1,7 @@
 #![allow(dead_code, unused_variables, unused_mut)]
 
 use aoc_std::*;
+use rayon::prelude::*;
 
 fn part1(input_file: &str) -> usize {
     let seeds = input_file
@@ -75,26 +76,31 @@ fn part2(input_file: &str) -> usize {
     for s in (0..seeds.len()).step_by(2) {
         seed_ranges.push((seeds[s], seeds[s + 1]));
     }
-    let mut lowest = usize::MAX;
-    for range in &seed_ranges {
+    let mut lowest = std::sync::Arc::new(std::sync::Mutex::new(usize::MAX));
+    seed_ranges.par_iter().for_each(|range| {
         println!("{range:?}");
+        let mut local_lowest = usize::MAX;
         for seed in range.0..range.0 + range.1 {
             let mut cur_seed = seed.to_owned();
             for map in &maps {
                 for inner_map in map {
-                    // TODO: better (if value > min < max something like that)
-                    if (inner_map[1]..inner_map[1] + inner_map[2]).contains(&cur_seed) {
+                    if cur_seed >= inner_map[1] && cur_seed <= inner_map[1] + inner_map[2] {
                         cur_seed = cur_seed - inner_map[1] + inner_map[0];
                         break;
                     }
                 }
             }
-            if cur_seed < lowest {
-                lowest = cur_seed;
+            if cur_seed < local_lowest {
+                local_lowest = cur_seed;
             }
         }
-    }
-    lowest
+        let mut lowest_val = lowest.lock().unwrap();
+        if local_lowest < *lowest_val {
+            *lowest_val = local_lowest;
+        }
+    });
+    let lowest_val = *lowest.lock().unwrap();
+    lowest_val
 }
 
 fn main() {

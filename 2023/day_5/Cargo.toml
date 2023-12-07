@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 aoc_std = { path = "../../aoc_std/" }
+rayon = "1.8.0"
