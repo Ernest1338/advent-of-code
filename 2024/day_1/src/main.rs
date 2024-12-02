@@ -2,22 +2,28 @@
 
 use aoc_std::*;
 
-fn part1(input_file: &str) -> isize {
-    let mut answer: isize = 0;
+fn parse_lists(input: &str) -> (Vec<isize>, Vec<isize>) {
     let (mut left, mut right) = (Vec::new(), Vec::new());
 
-    for line in input_file.lines() {
+    for line in input.lines() {
         let mut line_iter = line.split_whitespace();
 
         left.push(line_iter.next().unwrap().parse::<isize>().unwrap());
         right.push(line_iter.next().unwrap().parse::<isize>().unwrap());
     }
 
+    (left, right)
+}
+
+fn part1(input_file: &str) -> usize {
+    let mut answer: usize = 0;
+    let (mut left, mut right) = parse_lists(input_file);
+
     left.sort();
     right.sort();
 
     for (l, r) in left.iter().zip(right.iter()) {
-        answer += (l - r).abs();
+        answer += (l - r).unsigned_abs();
     }
 
     answer
@@ -25,14 +31,7 @@ fn part1(input_file: &str) -> isize {
 
 fn part2(input_file: &str) -> usize {
     let mut answer: usize = 0;
-    let (mut left, mut right) = (Vec::new(), Vec::new());
-
-    for line in input_file.lines() {
-        let mut line_iter = line.split_whitespace();
-
-        left.push(line_iter.next().unwrap().parse::<isize>().unwrap());
-        right.push(line_iter.next().unwrap().parse::<isize>().unwrap());
-    }
+    let (mut left, mut right) = parse_lists(input_file);
 
     for n in left {
         answer += n as usize * right.iter().filter(|&&x| x == n).count();
