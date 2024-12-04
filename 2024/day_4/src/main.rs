@@ -1,8 +1,8 @@
-// #![allow(dead_code, unused_variables, unused_mut)]
+#![allow(dead_code, unused_variables, unused_mut)]
 
 use aoc_std::*;
 
-fn debug_map(map: &Vec<Vec<char>>, points: &Vec<(usize, usize)>) {
+fn debug_map(map: &[Vec<char>], points: &[(usize, usize)]) {
     for x in 0..map.len() {
         for y in 0..map[0].len() {
             if points.contains(&(x, y)) {
