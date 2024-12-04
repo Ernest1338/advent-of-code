@@ -5,10 +5,9 @@ use regex::Regex;
 
 fn part1(input_file: &str) -> usize {
     let mut answer: usize = 0;
+    let re_mul = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
     for line in input_file.lines() {
-        let re = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
-
-        for captures in re.captures_iter(line) {
+        for captures in re_mul.captures_iter(line) {
             let num1: usize = captures.get(1).map_or("", |m| m.as_str()).parse().unwrap();
             let num2: usize = captures.get(2).map_or("", |m| m.as_str()).parse().unwrap();
             answer += num1 * num2;
@@ -20,9 +19,8 @@ fn part1(input_file: &str) -> usize {
 fn part2(input_file: &str) -> usize {
     let mut answer: usize = 0;
     let mut enabled = true;
+    let re_mul = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
     for line in input_file.lines() {
-        let re_mul = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
-
         let mut pos = 0;
         while pos < line.len() {
             let cur = &line[pos..];
