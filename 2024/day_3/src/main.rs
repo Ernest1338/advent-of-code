@@ -32,8 +32,8 @@ fn part2(input_file: &str) -> usize {
                 pos += "don't()".len();
             } else if cur.starts_with("mul(") {
                 let cap_mul = re_mul.captures(cur).unwrap();
-                let start = pos + cap_mul.get(0).unwrap().start();
-                if enabled && start - pos == 0 {
+                let start = cap_mul.get(0).unwrap().start();
+                if enabled && start == 0 {
                     let num1: usize = cap_mul[1].parse().unwrap();
                     let num2: usize = cap_mul[2].parse().unwrap();
                     answer += num1 * num2;
