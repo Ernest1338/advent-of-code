@@ -1,0 +1,8 @@
+[package]
+name = "day_3"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+aoc_std = { path = "../../aoc_std/" }
+regex = "1.11.1"
