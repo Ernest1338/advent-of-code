@@ -1,4 +1,4 @@
-// #![allow(dead_code, unused_variables, unused_mut)]
+#![allow(dead_code, unused_variables, unused_mut)]
 
 use aoc_std::*;
 use regex::Regex;
