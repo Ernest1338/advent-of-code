@@ -11,17 +11,15 @@ enum RuleOutcome {
 fn check_rule(rule: &[usize], update: &[usize]) -> RuleOutcome {
     // println!("{update:?}\t{rule:?}");
 
-    let left_index = update.iter().position(|&x| x == rule[0]);
-    if left_index.is_none() {
-        return RuleOutcome::None;
-    }
-    let left_index = left_index.unwrap();
+    let left_index = match update.iter().position(|&x| x == rule[0]) {
+        Some(v) => v,
+        None => return RuleOutcome::None,
+    };
 
-    let right_index = update.iter().position(|&x| x == rule[1]);
-    if right_index.is_none() {
-        return RuleOutcome::None;
-    }
-    let right_index = right_index.unwrap();
+    let right_index = match update.iter().position(|&x| x == rule[1]) {
+        Some(v) => v,
+        None => return RuleOutcome::None,
+    };
 
     // println!("L: {left_index:?} R: {right_index:?}");
 
@@ -90,17 +88,16 @@ fn part2(input_file: &str) -> usize {
                     // println!("failed rule: {rule:?}");
 
                     // switch places
-                    let left_index = update.iter().position(|&x| x == rule[0]);
-                    if left_index.is_none() {
-                        continue;
-                    }
-                    let left_index = left_index.unwrap();
 
-                    let right_index = update.iter().position(|&x| x == rule[1]);
-                    if right_index.is_none() {
-                        continue;
-                    }
-                    let right_index = right_index.unwrap();
+                    let left_index = match update.iter().position(|&x| x == rule[0]) {
+                        Some(v) => v,
+                        None => continue,
+                    };
+
+                    let right_index = match update.iter().position(|&x| x == rule[1]) {
+                        Some(v) => v,
+                        None => continue,
+                    };
 
                     update.swap(left_index, right_index);
                     fixed = true;
