@@ -142,7 +142,7 @@ impl Map {
                         if self.loop_detect.iter().all(|&x| x) {
                             return Err("loop");
                         }
-                        if self.loop_detect.len() >= 100 {
+                        if self.loop_detect.len() >= 1000 {
                             self.loop_detect.remove(0);
                         }
                         self.loop_detect.push(true);
@@ -167,7 +167,7 @@ impl Map {
                         if self.loop_detect.iter().all(|&x| x) {
                             return Err("loop");
                         }
-                        if self.loop_detect.len() >= 100 {
+                        if self.loop_detect.len() >= 1000 {
                             self.loop_detect.remove(0);
                         }
                         self.loop_detect.push(true);
@@ -192,7 +192,7 @@ impl Map {
                         if self.loop_detect.iter().all(|&x| x) {
                             return Err("loop");
                         }
-                        if self.loop_detect.len() >= 100 {
+                        if self.loop_detect.len() >= 1000 {
                             self.loop_detect.remove(0);
                         }
                         self.loop_detect.push(true);
