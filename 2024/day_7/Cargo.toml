@@ -5,5 +5,4 @@ edition = "2024"
 
 [dependencies]
 aoc_std = { path = "../../aoc_std/" }
-itertools = "0.13.0"
 rayon = "1.10.0"
